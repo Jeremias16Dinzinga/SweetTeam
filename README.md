@@ -46,8 +46,9 @@ To develop a Project Management System, a web application that helps plan, monit
     16. Delete project. 
     17. Delete task. 
     18. Delete user from a project.
-
-    #Developer: Jeremias Dinzinga
-    #Email: jeremias.antonio1999@gmail.com
-    #Linkedin:linkedin.com/in/jeremias-dinzingaa9867b221
-    #Phone:(+244) 941747137 | 952547647
+    
+# - Developer information
+    Developer Name: Jeremias Dinzinga
+    Email: jeremias.antonio1999@gmail.com
+    Linkedin:linkedin.com/in/jeremias-dinzingaa9867b221
+    Phone:(+244) 941747137 | 952547647
