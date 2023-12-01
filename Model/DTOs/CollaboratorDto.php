@@ -103,7 +103,7 @@ if ($password != $passwordConfirm) {
             $temporary = $_FILES['photo']['tmp_name'];
             $newName = uniqid() . ".$extension";
             move_uploaded_file($temporary, $folder . $newName);
-            $photo = "Files/collaborator/" . $newName;
+            $photo = "../assets/Files/collaborator/" . $newName;
         } else {
             $photo = "";
             $photoErr = "Format Invalid";

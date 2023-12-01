@@ -1,3 +1,9 @@
+<?php
+	session_start();
+	if($_SESSION['id_user'] == ""|| $_SESSION['id_user'] == null){
+		header('location:login.php');
+	}
+?>
  <!-- Favicons -->
  <link href="../assets/img/sweetLogo.png" rel="icon">
   <link href="../assets/img/sweetLogo.png" rel="apple-touch-icon">
@@ -202,8 +208,8 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="../assets/img/profile-img1.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">J. Dinzinga</span>
+            <img src="<?php echo$_SESSION['photo'];?>" alt="Profile" class="rounded-circle">
+            <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo$_SESSION['user_name'];?></span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -240,7 +246,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="login.php">
+              <a class="dropdown-item d-flex align-items-center" href="logout.php">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Terminar sessão</span>
               </a>
