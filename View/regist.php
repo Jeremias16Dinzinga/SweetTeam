@@ -41,6 +41,13 @@
 </head>
 
 <body>
+    <?php
+    if (isset($_GET['passwordValidation'])) {
+        $passValidation = "";
+    } else {
+        $passValidation = "hidden";
+    }
+    ?>
 
     <main>
         <div class="container">
@@ -66,7 +73,16 @@
                                         <h5 class="card-title text-center pb-0 fs-4">Criar uma conta</h5>
                                     </div>
 
-                                    <form class="row g-3 needs-validation" novalidate action="../Controller/CollaboratorController.php" method="POST" enctype="multipart/form-data">
+                                    <div class="alert alert-danger text-center alert-dismissible fade show" role="alert"
+                                        <?php echo $passValidation; ?>>
+                                        Palavra não confirmada, verifica a palavra Passe!
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                    </div>
+
+                                    <form class="row g-3 needs-validation" novalidate
+                                        action="../Controller/CollaboratorController.php" method="POST"
+                                        enctype="multipart/form-data">
                                         <div class="col-12">
                                             <label for="yourName" class="form-label">Nome</label>
                                             <input type="text" name="name" class="form-control" id="yourName" required>
@@ -75,14 +91,14 @@
 
                                         <div class="col-12">
                                             <label for="yourProfession" class="form-label">Profissão</label>
-                                            <input type="text" name="profession" class="form-control" id="yourProfession"
-                                                required>
+                                            <input type="text" name="profession" class="form-control"
+                                                id="yourProfession" required>
                                             <div class="invalid-feedback">Porfavor, Insira a sua profissão!</div>
                                         </div>
                                         <div class="col-12">
                                             <label for="yourPhone" class="form-label">Telefone</label>
                                             <div class="input-group">
-                                                <span class="input-group-text" id="inputGroupPrepend2">+244</span>                                               
+                                                <span class="input-group-text" id="inputGroupPrepend2">+244</span>
                                                 <input type="text" class="form-control" name="phone" id="yourPhone"
                                                     aria-describedby="inputGroupPrepend2" required>
                                             </div>
@@ -93,8 +109,8 @@
                                             <label for="yourEmail" class="form-label">E-mail</label>
                                             <div class="input-group has-validation">
                                                 <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                                <input type="email" name="email" class="form-control"
-                                                    id="yourEmail" required>
+                                                <input type="email" name="email" class="form-control" id="yourEmail"
+                                                    required>
                                                 <div class="invalid-feedback">Porfavor, Insira seu email!</div>
                                             </div>
                                         </div>
@@ -107,7 +123,8 @@
                                         </div>
 
                                         <div class="col-12">
-                                            <label for="yourConfirmPassword" class="form-label">Confirme Palavra Passe</label>
+                                            <label for="yourConfirmPassword" class="form-label">Confirme Palavra
+                                                Passe</label>
                                             <input type="password" name="passwordConfirm" class="form-control"
                                                 id="yourConfirmPassword" required>
                                             <div class="invalid-feedback">Porfavor, confirme a Palavra Passe!</div>
@@ -115,8 +132,8 @@
 
                                         <div class="col-12">
                                             <label for="yourPhoto" class="form-label">Foto</label>
-                                            <input type="file" name="photo" class="form-control"
-                                                id="yourPhoto" required>
+                                            <input type="file" name="photo" class="form-control" id="yourPhoto"
+                                                required>
                                             <div class="invalid-feedback">Porfavor, carregue uma foto!</div>
                                         </div>
 
@@ -124,7 +141,8 @@
                                             <div class="form-check">
                                                 <input class="form-check-input" name="terms" type="checkbox" value=""
                                                     id="acceptTerms" required>
-                                                <label class="form-check-label" for="acceptTerms">Eu concordo e aceito os
+                                                <label class="form-check-label" for="acceptTerms">Eu concordo e aceito
+                                                    os
                                                     <a href="#">termos e condições</a></label>
                                                 <div class="invalid-feedback">Tu deves concordar antes de enviar.</div>
                                             </div>
@@ -133,8 +151,8 @@
                                             <button class="btn btn-primary w-100" type="submit">Criar Conta</button>
                                         </div>
                                         <div class="col-12 text-center">
-                                            <p class="small mb-0">Já tem uma conta? <a
-                                                    href="login.php">Iniciar Sessão</a></p>
+                                            <p class="small mb-0">Já tem uma conta? <a href="login.php">Iniciar
+                                                    Sessão</a></p>
                                         </div>
                                     </form>
 

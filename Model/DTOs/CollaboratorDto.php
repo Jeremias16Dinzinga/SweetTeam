@@ -16,10 +16,9 @@ if (isset($_GET['passwordConfirm'])) {
     $passwordConfirm = "";
 }
 
-if ($password != $passwordConfirm) {
-    $passwordValidation = null;
+if ($password != $passwordConfirm) {    
+    header('location:../view/regist.php?passwordValidation=1');
 } else {
-    $passwordValidation = 1;
 
     if (isset($_GET['id_collaborator'])) {
         $id_collaborador = filter_input(INPUT_GET, 'id_collaborator', FILTER_SANITIZE_NUMBER_INT);

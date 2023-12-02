@@ -1,4 +1,5 @@
 <?php
+  include('../DAO/Crud.php');
 	session_start();
 	if($_SESSION['id_user'] == ""|| $_SESSION['id_user'] == null){
 		header('location:login.php');
@@ -214,8 +215,8 @@
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Jeremias Dinzinga</h6>
-              <span>Back-end Developer</span>
+              <h6><?php echo$_SESSION['user_name'];?></h6>
+              <span><?php echo$_SESSION['profession'];?></span>
             </li>
             <li>
               <hr class="dropdown-divider">

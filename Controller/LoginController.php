@@ -22,6 +22,7 @@ $_SESSION['id_user'] = $result['id_collaborator'];
 $_SESSION['user_name'] = $result['name'];
 $_SESSION['password'] = $result['password'];
 $_SESSION['photo'] = $result['photo'];
+$_SESSION['profession'] = $result['profession'];
 
 if ($_SESSION['id_user'] != "" || $_SESSION['id_user'] != null) {
     header('location:../view/index.php');

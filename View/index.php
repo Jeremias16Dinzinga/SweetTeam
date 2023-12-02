@@ -1,6 +1,4 @@
-<?php
-include('../DAO/DataConnection.php');
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 

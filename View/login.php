@@ -72,6 +72,13 @@
                                         <h5 class="card-title text-center pb-0 fs-4">Iniciar Sessão</h5>
                                         <p class="text-center small"></p>
                                     </div>
+                                    
+                                    <div class="alert alert-danger text-center alert-dismissible fade show" role="alert"
+                                        <?php echo $textErr; ?>>
+                                        Credenciais errado!
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                    </div>
 
                                     <form method="POST" class="row g-3 needs-validation" novalidate
                                         action="../Controller/LoginController.php">
@@ -99,12 +106,7 @@
                                                     value="true" id="rememberMe">
                                                 <label class="form-check-label" for="rememberMe">Lembrar me</label>
                                             </div>
-                                            <div class="alert alert-danger alert-dismissible fade show" role="alert"
-                                                <?php echo $textErr; ?>>
-                                                Credenciais errado
-                                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                                    aria-label="Close"></button>
-                                            </div>
+
                                         </div>
                                         <div class="col-12">
                                             <button class="btn btn-primary w-100" type="submit">Entrar</button>
