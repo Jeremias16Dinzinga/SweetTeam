@@ -84,9 +84,14 @@
                                         action="../Controller/CollaboratorController.php" method="POST"
                                         enctype="multipart/form-data">
                                         <div class="col-12">
-                                            <label for="yourName" class="form-label">Nome</label>
-                                            <input type="text" name="name" class="form-control" id="yourName" required>
-                                            <div class="invalid-feedback">Porfavor, Insira seu nome!</div>
+                                            <label for="yourName" class="form-label">Primeiro Nome</label>
+                                            <input type="text" name="first_name" class="form-control" id="yourName" required>
+                                            <div class="invalid-feedback">Porfavor, Insira seu Primeiro nome!</div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="yourName" class="form-label">Sobre Nome</label>
+                                            <input type="text" name="last_name" class="form-control" id="yourLastName" required>
+                                            <div class="invalid-feedback">Porfavor, Insira seu Sobre nome!</div>
                                         </div>
 
                                         <div class="col-12">

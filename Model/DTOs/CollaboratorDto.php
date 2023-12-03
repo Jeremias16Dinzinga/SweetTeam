@@ -16,7 +16,7 @@ if (isset($_GET['passwordConfirm'])) {
     $passwordConfirm = "";
 }
 
-if ($password != $passwordConfirm) {    
+if ($password != $passwordConfirm) {
     header('location:../view/regist.php?passwordValidation=1');
 } else {
 
@@ -28,12 +28,20 @@ if ($password != $passwordConfirm) {
         $id_collaborator = 0;
     }
 
-    if (isset($_GET['name'])) {
-        $name = filter_input(INPUT_GET, 'name', FILTER_SANITIZE_SPECIAL_CHARS);
-    } elseif (isset($_POST['name'])) {
-        $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_SPECIAL_CHARS);
+    if (isset($_GET['first_name'])) {
+        $first_name = filter_input(INPUT_GET, 'first_name', FILTER_SANITIZE_SPECIAL_CHARS);
+    } elseif (isset($_POST['first_name'])) {
+        $first_name = filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_SPECIAL_CHARS);
     } else {
-        $name = "";
+        $first_name = "";
+    }
+
+    if (isset($_GET['last_name'])) {
+        $last_name = filter_input(INPUT_GET, 'last_name', FILTER_SANITIZE_SPECIAL_CHARS);
+    } elseif (isset($_POST['last_name'])) {
+        $last_name = filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_SPECIAL_CHARS);
+    } else {
+        $last_name = "";
     }
 
     if (isset($_GET['phone'])) {
@@ -110,5 +118,9 @@ if ($password != $passwordConfirm) {
     } else {
         $photo = "";
     }
+    $dateTime = new DateTime();
+
+    $create_date = $dateTime->format('Y-m-d H:i:s');
+    $update_date = $dateTime->format('Y-m-d H:i:s');
 }
 ?>

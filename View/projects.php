@@ -29,143 +29,96 @@
 
     <section class="section">
       <div class="row">
-        <div class="col-lg-6">
-          <div class="card">
-            <div class="card-header">Nome do projecto</div>
-            <div class="card-body">
-              <!-- Start of project content -->
-              <br />
-              <span class="text-secondary"> Prazo: 24-12-2023 </span><i class="bi bi-alarm-fill text-secondary"></i>
-              <br />
-              <span class="text-secondary"> Estado: </span> <span class="badge bg-danger"><i
-                  class="bi bi-exclamation-octagon me-1"></i> Cancelado</span> <br />
-              <span class="text-secondary"> Resposnsável: Kaleb Dinzinga</span> <br /><br />
-              <button type="button" class="btn btn-primary"><i class="bi bi-journal-text"></i><span>
-                  Tarefas(14)</span></button>
-              <button type="button" class="btn btn-success"><i class="ri-team-line"></i><span>
-                  Colaboradores</span></button>
-              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#CancelModel"> <i
-                  class="ri-close-circle-line"></i><span> Cancelar</span></button>
-              <div class="d-grid gap-2 mt-3">
-                <a href="addCollaborator.php" class="btn btn-secondary"><i class="bi bi-eye "></i><span> Mais
-                    Detalhes</span></a>
-              </div>
-              <!-- End of project content -->
-            </div>
-            <div class="card-footer">
-              13/11/2023 - 22h:39Min <i class="bi bi-clock "></i>
-            </div>
-          </div>
-        </div>
+        <?php
+        $crud = new Crud();
+        $result = $crud->selectBD("project", "*", "");
 
-        <div class="col-lg-6">
-          <div class="card">
-            <div class="card-header">Nome do projecto</div>
-            <div class="card-body">
-              <!-- Start of project content -->
-              <br />
-              <span class="text-secondary"> Prazo: 24-12-2023 </span><i class="bi bi-alarm-fill text-secondary"></i>
-              <br />
-              <span class="text-secondary"> Estado: </span><span class="badge bg-success"><i
-                  class="bi bi-check-circle me-1"></i> Concluido</span> <br />
-              <span class="text-secondary"> Resposnsável: Kaleb Dinzinga</span> <br /><br />
-              <button type="button" class="btn btn-primary"><i class="bi bi-journal-text"></i><span>
-                  Tarefas(10)</span></button>
-              <button type="button" class="btn btn-success"><i class="ri-team-line"></i><span>
-                  Colaboradores</span></button>
-              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#CancelModel"> <i
-                  class="ri-close-circle-line"></i><span> Cancelar</span></button>
-              <div class="d-grid gap-2 mt-3">
-                <a href="addCollaborator.php" class="btn btn-secondary"><i class="bi bi-eye "></i><span> Mais
-                    Detalhes</span></a>
-              </div>
-              <!-- End of project content -->
-            </div>
-            <div class="card-footer">
-              13/11/2023 - 22h:39Min <i class="bi bi-clock "></i>
-            </div>
-          </div>
-        </div>
 
-        <div class="col-lg-6">
-          <div class="card">
-            <div class="card-header">Nome do projecto</div>
-            <div class="card-body">
-              <!-- Start of project content -->
-              <br />
-              <span class="text-secondary"> Prazo: 24-12-2023 </span><i class="bi bi-alarm-fill text-secondary"></i>
-              <br />
-              <span class="text-secondary"> Estado: </span><span class="badge bg-warning text-dark"><i
-                  class="ri-history-line me-1"></i> Pendente</span><br />
-              <span class="text-secondary"> Resposnsável: Kaleb Dinzinga</span> <br /><br />
-              <button type="button" class="btn btn-primary"><i class="bi bi-journal-text"></i><span>
-                  Tarefas(5)</span></button>
-              <button type="button" class="btn btn-success"><i class="ri-team-line"></i><span>
-                  Colaboradores</span></button>
-              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#CancelModel"> <i
-                  class="ri-close-circle-line"></i><span> Cancelar</span></button>
-              <div class="d-grid gap-2 mt-3">
-                <a href="addCollaborator.php" class="btn btn-secondary"><i class="bi bi-eye "></i><span> Mais
-                    Detalhes</span></a>
-                Detalhes</span></button>
-              </div>
-              <!-- End of project content -->
-            </div>
-            <div class="card-footer">
-              13/11/2023 - 22h:39Min <i class="bi bi-clock "></i>
-            </div>
-          </div>
-        </div>
+        foreach ($result as $item) {
+          $leader = $crud->selectBD("collaborator", "*", "where id_collaborator = '{$item['id_leader']}'");
+          $count_task = $crud->selectBD("task", "count(*)", "where id_project = '{$item['id_project']}'");
 
-        <div class="col-lg-6">
-          <div class="card">
-            <div class="card-header">Nome do projecto</div>
-            <div class="card-body">
-              <!-- Start of project content -->
-              <br />
-              <span class="text-secondary"> Prazo: 24-12-2023 </span><i class="bi bi-alarm-fill text-secondary"></i>
-              <br />
-              <span class="text-secondary"> Estado: </span></span><span class="badge bg-warning text-dark"><i
-                  class="ri-history-line me-1"></i> Pendente</span> <br />
-              <span class="text-secondary"> Resposnsável: Kaleb Dinzinga</span> <br /><br />
-              <button type="button" class="btn btn-primary"><i class="bi bi-journal-text"></i><span>
-                  Tarefas(6)</span></button>
-              <button type="button" class="btn btn-success"><i class="ri-team-line"></i><span>
-                  Colaboradores</span></button>
-              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#CancelModel"> <i
-                  class="ri-close-circle-line"></i><span> Cancelar</span></button>
-              <div class="d-grid gap-2 mt-3">
-                <a href="addCollaborator.php" class="btn btn-secondary"><i class="bi bi-eye "></i><span> Mais
-                    Detalhes</span></a>
+          ?>
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-header">
+                <?php echo $item['description']; ?>
               </div>
-              <!-- End of project content -->
-            </div>
-            <div class="card-footer">
-              13/11/2023 - 22h:39Min <i class="bi bi-clock "></i>
-            </div>
-          </div>
-        </div>
-      </div>
+              <div class="card-body">
+                <!-- Start of project content -->
+                <br />
+                <span class="text-secondary"> Prazo:
+                  <?php echo $item['deadline']; ?>
+                </span><i class="bi bi-alarm-fill text-secondary"></i>
+                <br />
+                <div <?php if ($item['status'] != 'Cancelado')
+                  echo ('hidden') ?>>
+                    <span class="text-secondary"> Estado: </span> <span class="badge bg-danger"><i
+                        class="bi bi-exclamation-octagon me-1"></i>
+                    <?php echo $item['status']; ?>
+                  </span>
+                </div>
 
-      <!-- Basic Modal -->
-      <div class="modal fade" id="CancelModel" tabindex="-1">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Cancelar Projecto</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div <?php if ($item['status'] != 'Concluido')
+                  echo ('hidden') ?>>
+                    <span class="text-secondary"> Estado: </span><span class="badge bg-success"><i
+                        class="bi bi-check-circle me-1"></i>
+                    <?php echo $item['status']; ?>
+                  </span>
+                </div>
+                <div <?php if ($item['status'] != 'Pendente')
+                  echo ('hidden') ?>>
+                    <span class="text-secondary"> Estado: </span></span><span class="badge bg-warning text-dark"><i
+                        class="ri-history-line me-1"></i>
+                    <?php echo $item['status']; ?>
+                  </span>
+                </div>
+                <span class="text-secondary"> Resposnsável:
+                  <?php echo ($leader['first_name'] . " " . $leader['last_name']); ?>
+                </span> <br /><br />
+                <button type="button" class="btn btn-primary"><i class="bi bi-journal-text"></i><span>
+                    Tarefas(
+                    <?php echo $count_task['count(*)']; ?>)
+                  </span></button>
+                <a href="addCollaborator.php?id=<?php echo $item['id_project'] ?>" class="btn btn-success"><i
+                    class="ri-team-line"></i><span> Colaboradores</span></a>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#CancelModel"> <i
+                    class="ri-close-circle-line"></i><span> Cancelar</span></button>
+                <div class="d-grid gap-2 mt-3">
+                  <a href="addCollaborator.php?id=<?php echo $item['id_project'] ?>" class="btn btn-secondary"><i
+                      class="bi bi-eye "></i><span> Mais
+                      Detalhes</span></a>
+                </div>
+                <!-- End of project content -->
+              </div>
+              <div class="card-footer">
+                <?php echo $item['create_date']; ?> <i class="bi bi-clock "></i>
+              </div>
             </div>
-            <div class="modal-body">
-              Realmente pretendes cancelar o projecto, se cancelares não poderás contribuir para o projecto.
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Não</button>
-              <button type="button" class="btn btn-success">Sim</button>
+          </div>
+          <?php
+        }
+        ?>
+
+        <!-- Basic Modal -->
+        <div class="modal fade" id="CancelModel" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Cancelar Projecto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                Realmente pretendes cancelar o projecto, se cancelares não poderás contribuir para o projecto.
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Não</button>
+                <button type="button" class="btn btn-success">Sim</button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <!-- End Basic Modal-->
+        <!-- End Basic Modal-->
     </section>
 
   </main><!-- End #main -->

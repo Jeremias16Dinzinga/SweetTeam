@@ -40,4 +40,9 @@ if (isset($_GET['id_leader'])) {
     $id_leader = 0;
 }
 
+$dateTime = new DateTime();
+
+$create_date = $dateTime->format('Y-m-d H:i:s');
+$update_date = $dateTime->format('Y-m-d H:i:s');
+
 ?>

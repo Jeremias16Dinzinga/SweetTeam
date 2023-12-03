@@ -1,6 +1,6 @@
 <?php
 enum  StatusNotice{
-    case Visto;
-    case Pendente;
+    case VIEWED = 'Visto';
+    case PENDING = 'Pendente';
 }
 ?>

@@ -1,5 +1,5 @@
 <?php
-  include('../DAO/Crud.php');
+  include('../DAO/Crud.php');  
 	session_start();
 	if($_SESSION['id_user'] == ""|| $_SESSION['id_user'] == null){
 		header('location:login.php');

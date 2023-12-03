@@ -2,7 +2,8 @@
 class Collaborator
 {
     private $id_collaborator;
-    private $name;
+    private $first_name;
+    private $last_name;
     private $phone;
     private $profession;
     private $resume;
@@ -27,14 +28,22 @@ class Collaborator
     }
 
     // Getter e Setter para name
-    public function getName()
+    public function getFirstName()
     {
-        return $this->name;
+        return $this->first_name;
+    }
+    public function getLastName()
+    {
+        return $this->last_name;
     }
 
-    public function setName($name)
+    public function setFirstName($first_name)
     {
-        $this->name = $name;
+        $this->name = $first_name;
+    }
+    public function setLastName($last_name)
+    {
+        $this->name = $last_name;
     }
 
     // Getter e Setter para phone

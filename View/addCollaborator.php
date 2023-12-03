@@ -58,7 +58,7 @@
                                         ?>
                                         <tr>
                                             <td>
-                                                <?php echo $item['name']; ?>
+                                                <?php echo ($item['first_name']." ".$item['last_name']); ?>
                                             </td>
                                             <td>
                                                 <?php echo $item['profession']; ?>

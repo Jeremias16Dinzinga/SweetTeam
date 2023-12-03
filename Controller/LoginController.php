@@ -19,7 +19,7 @@ if (isset($_POST['password'])) {
 $result = $crud->selectBD("collaborator", "*", "where email = '{$email}' and password = '{$password}'");
 
 $_SESSION['id_user'] = $result['id_collaborator'];
-$_SESSION['user_name'] = $result['name'];
+$_SESSION['user_name'] = $result['first_name']." ".$result['last_name'];
 $_SESSION['password'] = $result['password'];
 $_SESSION['photo'] = $result['photo'];
 $_SESSION['profession'] = $result['profession'];
