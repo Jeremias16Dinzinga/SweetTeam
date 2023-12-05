@@ -16,7 +16,7 @@ if ($id_collaborator != null && $first_name != null && $last_name != null && $ph
 
 if (isset($_GET['add_collaborator_to_project'])) {
     $crud->insertBD("project_collaborator", "?,?", array($_GET['add_collaborator_to_project'], $_GET['this_project']));
-    header('location:../View/addCollaborator.php?id='.$_GET['this_project']);
+    header('location:../View/addCollaborator.php?id='.$_GET['this_project'].'&&success=1');
 
 }
 
@@ -28,7 +28,7 @@ if (isset($_GET['remove_collaborator_to_project'])) {
         $crud->deleteBD("project_collaborator","id_collaborator=? and id_project=? ",array($_GET['remove_collaborator_to_project'], $_GET['this_project']));
         header('location:../View/addCollaborator.php?id='.$_GET['this_project']);
     }else{
-        header('location:../View/addCollaborator.php?id='.$_GET['this_project']);
+        header('location:../View/addCollaborator.php?id='.$_GET['this_project'].'&&notAllowed=1');
     }
 
     
