@@ -13,4 +13,3 @@ if ($result != null) {
 } else {
     header('location:../View/addProject.php?err=1');
 }
-?>

@@ -274,27 +274,27 @@
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="projects.php">
+        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="projects.php?target=all">
           <i class="bi bi-menu-button-wide"></i><span>Projectos</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="projects.php">
+            <a href="projects.php?target=all">
               <i class="bi bi-menu-button-wide"></i><span>Todos</span>
             </a>
           </li>
           <li>
-            <a href="projects.php">
+            <a href="projects.php?target=pending">
               <i class="ri-history-line"></i><span>Pendente</span>
             </a>
           </li>
           <li>
-            <a href="projects.php">
+            <a href="projects.php?target=canceled">
               <i class="ri-close-circle-line"></i><span>Cancelado</span>
             </a>
           </li>
           <li>
-            <a href="projects.php">
+            <a href="projects.php?target=achived">
               <i class="ri-checkbox-circle-line"></i><span>Concluido</span>
             </a>
           </li>
