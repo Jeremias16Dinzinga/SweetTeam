@@ -78,10 +78,9 @@
                                                 <img src="<?php echo ($item['photo']); ?>" width="45px" height="45px"
                                                     alt="Profile" class="rounded-circle">
                                             </td>
-                                            <td>                                               
-                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                                    data-bs-target="#deleteCollaboratorModel"> <i
-                                                        class="bi bi-dash-circle"></i></button>
+                                            <td>
+                                                <a href="../controller/CollaboratorController.php?remove_collaborator_to_project=<?php echo $item["id_collaborator"] ?>&&this_project=<?php echo $_GET['id'] ?>"
+                                                    class="btn btn-danger"><i class="bi bi-dash-circle"></i></a>
                                             </td>
                                         </tr>
                                         <?php
@@ -218,8 +217,8 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Não</button>
-                            <a href="../controller/CollaboratorController.php?remove_collaborator_to_project=<?php echo $item['id_collaborator'] ?>&&this_project=<?php echo $_GET['id'] ?>"
-                                class="btn btn-success">Sim</a>
+                            <button type="submit" class="btn btn-success" data-bs-toggle="modal"
+                                data-bs-target="#deleteCollaboratorModel"> Sim</button>
                         </div>
                     </div>
                 </div>

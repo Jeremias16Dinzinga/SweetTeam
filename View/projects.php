@@ -17,13 +17,13 @@
   function target($x, $crud)
   {
     if ($_GET['target'] == "all") {
-      return $projects = $crud->selectBD("project", "*", "where id_project = '{$x}'");
+      return $projects = $crud->selectBD("project", "*", "where id_project = '{$x["id_project"]}'");
     } elseif ($_GET['target'] == "pending") {
-      return $projects = $crud->selectBD("project", "*", "where id_project = '{$x}' and status = 'Pendente'");
+      return $projects = $crud->selectBD("project", "*", "where id_project = '{$x["id_project"]}' and status = 'Pendente'");
     } elseif ($_GET['target'] == "achived") {
-      return $projects = $crud->selectBD("project", "*", "where id_project = '{$x}' and status = 'Concluido'");
+      return $projects = $crud->selectBD("project", "*", "where id_project = '{$x["id_project"]}' and status = 'Concluido'");
     } else {
-      return $projects = $crud->selectBD("project", "*", "where id_project = '{$x}' and status = 'Cancelado'");
+      return $projects = $crud->selectBD("project", "*", "where id_project = '{$x["id_project"]}' and status = 'Cancelado'");
     }
   }
   ?>
@@ -48,7 +48,7 @@
         <?php
         $crud = new Crud();
 
-        $my_projectsIds = $crud->selectBD("project_collaborator", "id_project", "where id_collaborator = '{$_SESSION['id_user']}'");   //Get all the ID projects I'm in                               
+        $my_projectsIds = $crud->selectByFieldBD("project_collaborator", "id_project", "where id_collaborator = '{$_SESSION['id_user']}'");   //Get all the ID projects I'm in                                       
         
         if ($my_projectsIds != null) {
           foreach ($my_projectsIds as $x) {
