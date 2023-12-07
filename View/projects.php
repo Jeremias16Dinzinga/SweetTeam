@@ -99,10 +99,11 @@
                   <span class="text-secondary"> Resposnsável:
                     <?php echo ($leader['first_name'] . " " . $leader['last_name']); ?>
                   </span> <br /><br />
-                  <button type="button" class="btn btn-primary"><i class="bi bi-journal-text"></i><span>
+                  <a href="addTask.php?id=<?php echo $item['id_project'] ?>" class="btn btn-primary"><i
+                      class="bi bi-journal-text"></i><span>
                       Tarefas(
                       <?php echo $count_task['count(*)']; ?>)
-                    </span></button>
+                    </span></a>
                   <a href="addCollaborator.php?id=<?php echo $item['id_project'] ?>" class="btn btn-success"><i
                       class="ri-team-line"></i><span> Colaboradores</span></a>
                   <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#CancelModel"> <i
