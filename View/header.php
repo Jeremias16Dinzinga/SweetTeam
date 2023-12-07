@@ -307,22 +307,22 @@
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li class="nav-item">
-            <a href="tasks.php">
+            <a href="tasks.php?target=all">
               <i class="bi bi-clipboard"></i><span>Todos</span>
             </a>
           </li>
           <li class="nav-item">
-            <a href="tasks.php">
+            <a href="tasks.php?target=pending">
               <i class="ri-history-line"></i><span>Pendente</span>
             </a>
           </li>
           <li>
-            <a href="tasks.php">
+            <a href="tasks.php?target=overtime">
               <i class="ri-alarm-warning-line"></i><span>Atrazado</span>
             </a>
           </li>
           <li>
-            <a href="tasks.php">
+            <a href="tasks.php?target=achived">
               <i class="ri-checkbox-circle-line"></i><span>Concluido</span>
             </a>
           </li>
