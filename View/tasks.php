@@ -98,8 +98,10 @@
                       </span><i class="bi bi-alarm-fill text-secondary"></i></p>
                   </div>
                   <div class="d-grid gap-2 mt-3">
-                    <button type="button" class="<?php echo $buttonColor; ?>"><i class="<?php echo $buttonIcon; ?>"></i><span>
-                    <?php echo $buttonText; ?></span></button>
+                    <a href="../Controller/TaskController.php?id_task=<?php echo $item['id_task'] ?>&&status=<?php echo$_GET['target']?>"
+                      class="<?php echo $buttonColor; ?>"><i class="<?php echo $buttonIcon; ?>"></i><span>
+                        <?php echo $buttonText; ?>
+                      </span></a>
                   </div>
                   <!-- End of project content -->
                 </div>

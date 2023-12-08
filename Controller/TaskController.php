@@ -11,5 +11,16 @@ if ($description != null && $description != "" && $id_project != null && $id_pro
     } else {
         header('location:../View/addProject.php?err=1');
     }
+}
 
+if(isset($_GET['id_task'])){
+    $my_task = $crud->selectBD("task", "*", "where id_task = '{$_GET['id_task']}'");
+    var_dump($my_task);
+    if($my_task['status']=="Pendente" || $my_task['status']=="Atrazado"){
+        $result = $crud->updateBD("task","status=?","id_task = '{$_GET['id_task']}'",array(StatusActivit::Concluido->name));
+    }else{
+        $result = $crud->updateBD("task","status=?","id_task = '{$_GET['id_task']}'",array(StatusActivit::Pendente->name));
+    }
+
+    header('location:../View/tasks.php?target='.$_GET['status']);
 }

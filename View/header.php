@@ -1,31 +1,49 @@
 <?php
-  include('../DAO/Crud.php');  
-	session_start();
-	if($_SESSION['id_user'] == ""|| $_SESSION['id_user'] == null){
-		header('location:login.php');
-	}
+include('../DAO/Crud.php');
+include('../Model/Enum/StatusActivit.php');
+
+#Authetication session
+session_start();
+if ($_SESSION['id_user'] == "" || $_SESSION['id_user'] == null) {
+  header('location:login.php');
+}
+
+#Verification of deadline task to show it as delayed task
+$crud = new Crud();
+$dateTime = new DateTime();
+
+$all_tasks = $crud->selectBD("task", "*", "");
+foreach ($all_tasks as $task) {
+  $now = $dateTime->format('Y-m-d H:i:s');
+  $deadline = strtotime($task['deadline']);
+  if ($deadline < $now && $task['status'] == "Pendente") {
+    $crud->updateBD("task", "status=?", "id_task = '{$task['id_task']}'", array(StatusActivit::Atrazado->name));
+  }
+}
 ?>
- <!-- Favicons -->
- <link href="../assets/img/sweetLogo.png" rel="icon">
-  <link href="../assets/img/sweetLogo.png" rel="apple-touch-icon">
+<!-- Favicons -->
+<link href="../assets/img/sweetLogo.png" rel="icon">
+<link href="../assets/img/sweetLogo.png" rel="apple-touch-icon">
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+<!-- Google Fonts -->
+<link href="https://fonts.gstatic.com" rel="preconnect">
+<link
+  href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+  rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="../assets/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="../assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="../assets/vendor/simple-datatables/style.css" rel="stylesheet">
+<!-- Vendor CSS Files -->
+<link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+<link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+<link href="../assets/vendor/quill/quill.snow.css" rel="stylesheet">
+<link href="../assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+<link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+<link href="../assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
-  <!-- Template Main CSS File -->
-  <link href="../assets/css/style.css" rel="stylesheet">
+<!-- Template Main CSS File -->
+<link href="../assets/css/style.css" rel="stylesheet">
 
-  <!-- =======================================================
+<!-- =======================================================
   * Template Name: NiceAdmin
   * Updated: Sep 18 2023 with Bootstrap v5.3.2
   * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
@@ -209,14 +227,20 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="<?php echo$_SESSION['photo'];?>" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo$_SESSION['user_name'];?></span>
+            <img src="<?php echo $_SESSION['photo']; ?>" alt="Profile" class="rounded-circle">
+            <span class="d-none d-md-block dropdown-toggle ps-2">
+              <?php echo $_SESSION['user_name']; ?>
+            </span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6><?php echo$_SESSION['user_name'];?></h6>
-              <span><?php echo$_SESSION['profession'];?></span>
+              <h6>
+                <?php echo $_SESSION['user_name']; ?>
+              </h6>
+              <span>
+                <?php echo $_SESSION['profession']; ?>
+              </span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -231,7 +255,7 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-            
+
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -274,7 +298,8 @@
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="projects.php?target=all">
+        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse"
+          href="projects.php?target=all">
           <i class="bi bi-menu-button-wide"></i><span>Projectos</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -333,14 +358,14 @@
         <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="collaboratores.php">
           <i class="ri-team-line"></i><span>Colaboradores</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">        
+        <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="collaboratores.php">
+            <a href="collaboratores.php?target=all">
               <i class="ri-open-arm-line"></i><span>Disponível</span>
             </a>
           </li>
           <li>
-            <a href="collaboratores.php">
+            <a href="collaboratores.php?target=shared">
               <i class="ri-contacts-line"></i><span>Partilhado</span>
             </a>
           </li>
@@ -367,7 +392,7 @@
           <span>Criar projecto</span>
         </a>
       </li><!-- End createProject Page Nav -->
-    
+
     </ul>
 
   </aside><!-- End Sidebar-->
