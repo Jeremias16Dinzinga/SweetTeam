@@ -20,6 +20,19 @@ foreach ($all_tasks as $task) {
     $crud->updateBD("task", "status=?", "id_task = '{$task['id_task']}'", array(StatusActivit::Atrazado->name));
   }
 }
+
+function time_manage($create_date, $dateTime)
+{
+  $new_date = strtotime($create_date);
+  return date(' l d M - H:i', $new_date);
+}
+
+#Counting the notification
+$count_notice = $crud->selectBD("notice", "count(*)", "where id_destin = '{$_SESSION['id_user']}' and status = 'Pendente'");
+
+#Counting the message
+$count_message = $crud->selectBD("message", "count(*)", "where id_destin = '{$_SESSION['id_user']}' and status = 'Pendente'");
+
 ?>
 <!-- Favicons -->
 <link href="../assets/img/sweetLogo.png" rel="icon">
@@ -87,65 +100,53 @@ foreach ($all_tasks as $task) {
 
           <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
             <i class="bi bi-bell"></i>
-            <span class="badge bg-primary badge-number">4</span>
+            <span class="badge bg-primary badge-number">
+              <?php echo $count_notice["count(*)"] ?>
+            </span>
           </a><!-- End Notification Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
             <li class="dropdown-header">
-              Há 4 novas notificações
+              <?php if ($count_notice["count(*)"] != 0) {
+                echo ("Há " . $count_notice["count(*)"] . " novas notificações");
+              } else {
+                echo ("Nenhuma notificação");
+              } ?>
               <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
             </li>
             <li>
               <hr class="dropdown-divider">
             </li>
+            <?php
 
-            <li class="notification-item">
-              <i class="bi bi-exclamation-circle text-warning"></i>
-              <div>
-                <h4>Lorem Ipsum</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>30 min. ago</p>
-              </div>
-            </li>
+            $my_notices = $crud->selectByFieldBD("notice", "*", "where id_destin = '{$_SESSION['id_user']}' and status = 'Pendente'");
 
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+            if ($my_notices != null) {
+              foreach ($my_notices as $item) {
+                ?>
 
-            <li class="notification-item">
-              <i class="bi bi-x-circle text-danger"></i>
-              <div>
-                <h4>Atque rerum nesciunt</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>1 hr. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-check-circle text-success"></i>
-              <div>
-                <h4>Sit rerum fuga</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>2 hrs. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-info-circle text-primary"></i>
-              <div>
-                <h4>Dicta reprehenderit</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>4 hrs. ago</p>
-              </div>
-            </li>
+                <li class="notification-item">
+                  <i <?php if ($item["title"] != "Removido do projecto")
+                    echo "hidden" ?> class="bi bi-x-circle text-danger"></i>
+                    <i <?php if ($item["title"] != "Adicionado ao projecto")
+                    echo "hidden" ?>
+                      class="bi bi-check-circle text-success"></i>
+                    <div>
+                      <h4>
+                      <?php echo $item["title"] ?>
+                    </h4>
+                    <p>
+                      <?php echo $item["content"] ?>
+                    </p>
+                    <p>
+                      <?php echo (time_manage($item["create_date"], $dateTime)) ?> min
+                    </p>
+                  </div>
+                </li>
+                <?php
+              }
+            }
+            ?>
 
             <li>
               <hr class="dropdown-divider">
@@ -162,63 +163,48 @@ foreach ($all_tasks as $task) {
 
           <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
             <i class="bi bi-chat-left-text"></i>
-            <span class="badge bg-success badge-number">3</span>
+            <span class="badge bg-success badge-number">
+              <?php echo $count_message["count(*)"] ?>
+            </span>
           </a><!-- End Messages Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
             <li class="dropdown-header">
-              Há 3 novas mensagens
+              <?php if ($count_message["count(*)"] != 0) {
+                echo ("Há " . $count_message["count(*)"] . " mensagens novas");
+              } else {
+                echo ("Nenhuma mensagem");
+              } ?>
               <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
             </li>
             <li>
               <hr class="dropdown-divider">
             </li>
+            <?php
 
-            <li class="message-item">
-              <a href="#">
-                <img src="../assets/img/messages-1.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>Maria Hudson</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>4 hrs. ago</p>
-                </div>
-              </a>
-            </li>
+            $my_messages = $crud->selectByFieldBD("message", "*", "where id_destin = '{$_SESSION['id_user']}' and status = 'Pendente'");
+
+            if ($my_messages != null) {
+              foreach ($my_messages as $item) {
+                ?>
+
+                <li class="message-item">
+                  <a href="#">
+                    <img src="../assets/img/messages-1.jpg" alt="" class="rounded-circle">
+                    <div>
+                      <h4>Maria Hudson</h4>
+                      <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                      <p>4 hrs. ago</p>
+                    </div>
+                  </a>
+                </li>
+                <?php
+              }
+            }
+            ?>
             <li>
               <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="../assets/img/messages-2.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>Anna Nelson</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>6 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="../assets/img/messages-3.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>David Muldon</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>8 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="dropdown-footer">
-              <a href="#">Todas mensagens</a>
-            </li>
+            </li>                    
 
           </ul><!-- End Messages Dropdown Items -->
 
