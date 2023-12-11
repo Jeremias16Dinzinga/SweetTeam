@@ -33,13 +33,14 @@
                     <div class="card">
                         <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-                            <img src="../assets/img/profile-img1.jpg" alt="Profile" class="rounded-circle">
-                            <h2>Jeremias Dinzinga</h2>
-                            <h3>Back-Developer</h3>
+                            <img src="<?php echo $_SESSION['photo']; ?>" alt="Profile" class="rounded-circle">
+                            <h2><?php echo $_SESSION['user_name']; ?></h2>
+                            <h3><?php echo $_SESSION['profession']; ?></h3>
+                            <?php ?>
                             <div class="social-links mt-2">
-                                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                                <a href="#" class="facebook"><i class="bi bi-github"></i></a>                                
-                                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                                <a href="<?php echo$_SESSION['twitterUrl']; ?>" class="twitter"><i class="bi bi-twitter"></i></a>
+                                <a href="<?php echo$_SESSION['githubUrl']; ?>" class="github"><i class="bi bi-github"></i></a>                                
+                                <a href="<?php echo$_SESSION['linkedinUrl']; ?>" class="linkedin"><i class="bi bi-linkedin"></i></a>
                             </div>
                         </div>
                     </div>
@@ -73,41 +74,33 @@
 
                                 <div class="tab-pane fade show active profile-overview" id="profile-overview">
                                     <h5 class="card-title">Sobre</h5>
-                                    <p class="small fst-italic">Sunt est soluta temporibus accusantium neque nam maiores
-                                        cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt
-                                        iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea
-                                        saepe at unde.</p>
+                                    <p class="small fst-italic"><?php echo $_SESSION['resume']; ?></p>
 
                                     <h5 class="card-title">Perfil</h5>
 
                                     <div class="row">
                                         <div class="col-lg-3 col-md-4 label ">Nome</div>
-                                        <div class="col-lg-9 col-md-8">Jeremias Dinzinga</div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-4 label">Empresa</div>
-                                        <div class="col-lg-9 col-md-8">Sweet Technology</div>
-                                    </div>
+                                        <div class="col-lg-9 col-md-8"><?php echo $_SESSION['user_name']; ?></div>
+                                    </div>                                   
 
                                     <div class="row">
                                         <div class="col-lg-3 col-md-4 label">Função</div>
-                                        <div class="col-lg-9 col-md-8">Back-Developer</div>
+                                        <div class="col-lg-9 col-md-8"><?php echo $_SESSION['profession']; ?></div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-lg-3 col-md-4 label">País</div>
-                                        <div class="col-lg-9 col-md-8">Angola</div>
+                                        <div class="col-lg-9 col-md-8"><?php echo $_SESSION['country']; ?></div>
                                     </div>                     
 
                                     <div class="row">
                                         <div class="col-lg-3 col-md-4 label">Telefone</div>
-                                        <div class="col-lg-9 col-md-8">(+244) 941-747-137</div>
+                                        <div class="col-lg-9 col-md-8"><?php echo $_SESSION['phone']; ?></div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-lg-3 col-md-4 label">Email</div>
-                                        <div class="col-lg-9 col-md-8">jeremias.dinzinga@gmail.com</div>
+                                        <div class="col-lg-9 col-md-8"><?php echo $_SESSION['email']; ?></div>
                                     </div>
 
                                 </div>

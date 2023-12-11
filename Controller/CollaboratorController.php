@@ -5,12 +5,13 @@ include('../Model/Enum/StatusNotice.php');
 
 $crud = new Crud();
 
-if ($id_collaborator != null && $first_name != null && $last_name != null && $phone != null && $profession != null && $photo != null && $email != null && $password != null && $create_date != null && $update_date != null) {
-    $result = $crud->insertBD("collaborator", "?,?,?,?,?,?,?,?,?,?,?,?,?,?", array($id_collaborator, $first_name, $last_name, $phone, $profession, $resume, $photo, $email, $password, $linkdinUrl, $twiterUrl, $githubUrl, $create_date, $update_date));
+if ($first_name != null && $last_name != null && $phone != null && $profession != null && $photo != null && $email != null && $password != null && $country != null && $update_date != null) {
+    $create_date = $dateTime->format('Y-m-d H:i:s');
+    $result = $crud->insertBD("collaborator", "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?", array($id_collaborator, $first_name, $last_name, $phone, $profession, $resume, $photo, $email, $password, $linkdinUrl, $twiterUrl, $githubUrl, $country, $create_date, $update_date));
     if ($result != null) {
         header('location:../View/login.php');
     } else {
-        header('location:../View/lregist.php?err=1');
+        header('location:../View/regist.php?err=1');
     }
 }
 

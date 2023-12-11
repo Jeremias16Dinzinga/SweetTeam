@@ -85,12 +85,14 @@
                                         enctype="multipart/form-data">
                                         <div class="col-12">
                                             <label for="yourName" class="form-label">Primeiro Nome</label>
-                                            <input type="text" name="first_name" class="form-control" id="yourName" required>
+                                            <input type="text" name="first_name" class="form-control" id="yourName"
+                                                required>
                                             <div class="invalid-feedback">Porfavor, Insira seu Primeiro nome!</div>
                                         </div>
                                         <div class="col-12">
                                             <label for="yourName" class="form-label">Sobre Nome</label>
-                                            <input type="text" name="last_name" class="form-control" id="yourLastName" required>
+                                            <input type="text" name="last_name" class="form-control" id="yourLastName"
+                                                required>
                                             <div class="invalid-feedback">Porfavor, Insira seu Sobre nome!</div>
                                         </div>
 
@@ -101,9 +103,31 @@
                                             <div class="invalid-feedback">Porfavor, Insira a sua profissão!</div>
                                         </div>
                                         <div class="col-12">
+                                            <label for="yourCountry" class="form-label">País</label>
+                                            <select name="country" id="yourCountry" class="form-select"
+                                                aria-label="Default select example">
+                                                <option selected>Nacionalidade</option>
+                                                <option value="África do sul">África do sul</option>
+                                                <option value="Angola">Angola</option>
+                                                <option value="Brazil">Brazil</option>
+                                                <option value="Estados Unidos">Estados Unidos</option>
+                                                <option value="India">India</option>
+                                                <option value="República do Congo">República do Congo</option>
+                                            </select>
+                                            <div class="invalid-feedback">Porfavor, Insira a sua nacionalidade!</div>
+                                        </div>
+                                        <div class="col-12">
                                             <label for="yourPhone" class="form-label">Telefone</label>
-                                            <div class="input-group">
-                                                <span class="input-group-text" id="inputGroupPrepend2">+244</span>
+                                            <div class="input-group">                                                
+                                                <select class="input-group-text col-4" name="country_code" id="yourCountry" class="form-select"
+                                                    aria-label="Default select example">
+                                                    <option value="+244" selected>+244</option>
+                                                    <option value="+33">+33</option>
+                                                    <option value="+27">+27</option>
+                                                    <option value="+91">+91</option>
+                                                    <option value="+55">+55</option>
+                                                    <option value="+258">+258</option>                                                    
+                                                </select>
                                                 <input type="text" class="form-control" name="phone" id="yourPhone"
                                                     aria-describedby="inputGroupPrepend2" required>
                                             </div>

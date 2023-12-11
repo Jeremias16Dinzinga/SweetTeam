@@ -44,10 +44,10 @@ if ($password != $passwordConfirm) {
         $last_name = "";
     }
 
-    if (isset($_GET['phone'])) {
-        $phone = filter_input(INPUT_GET, 'phone', FILTER_SANITIZE_SPECIAL_CHARS);
+    if (isset($_GET['phone']) && isset($_GET['country_code'])) {
+        $phone = filter_input(INPUT_GET, 'country_code', FILTER_SANITIZE_SPECIAL_CHARS)." ".filter_input(INPUT_GET, 'phone', FILTER_SANITIZE_SPECIAL_CHARS);
     } elseif (isset($_POST['phone'])) {
-        $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_SPECIAL_CHARS);
+        $phone = filter_input(INPUT_POST, 'country_code', FILTER_SANITIZE_SPECIAL_CHARS)." ".filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_SPECIAL_CHARS);
     } else {
         $phone = "";
     }
@@ -81,7 +81,7 @@ if ($password != $passwordConfirm) {
     } elseif (isset($_POST['linkdinUrl'])) {
         $linkdinUrl = filter_input(INPUT_POST, 'linkdinUrl', FILTER_SANITIZE_URL);
     } else {
-        $linkdinUrl = "";
+        $linkdinUrl = "#";
     }
 
     if (isset($_GET['twiterUrl'])) {
@@ -89,7 +89,7 @@ if ($password != $passwordConfirm) {
     } elseif (isset($_POST['twiterUrl'])) {
         $twiterUrl = filter_input(INPUT_POST, 'twiterUrl', FILTER_SANITIZE_URL);
     } else {
-        $twiterUrl = "";
+        $twiterUrl = "#";
     }
 
     if (isset($_GET['githubUrl'])) {
@@ -97,7 +97,15 @@ if ($password != $passwordConfirm) {
     } elseif (isset($_POST['githubUrl'])) {
         $githubUrl = filter_input(INPUT_POST, 'githubUrl', FILTER_SANITIZE_URL);
     } else {
-        $githubUrl = "";
+        $githubUrl = "#";
+    }
+
+    if (isset($_GET['country'])) {
+        $country = filter_input(INPUT_GET, 'country', FILTER_SANITIZE_SPECIAL_CHARS);
+    } elseif (isset($_POST['country'])) {
+        $country = filter_input(INPUT_POST, 'country', FILTER_SANITIZE_SPECIAL_CHARS);
+    } else {
+        $country = "";
     }
 
     if (isset($_FILES['photo'])) {
@@ -119,8 +127,7 @@ if ($password != $passwordConfirm) {
         $photo = "";
     }
     $dateTime = new DateTime();
-
-    $create_date = $dateTime->format('Y-m-d H:i:s');
-    $update_date = $dateTime->format('Y-m-d H:i:s');
+    
+    $update_date = $dateTime->format('Y-m-d H:i:s');    
 }
 ?>
