@@ -21,7 +21,7 @@ if ($password != $passwordConfirm) {
 } else {
 
     if (isset($_GET['id_collaborator'])) {
-        $id_collaborador = filter_input(INPUT_GET, 'id_collaborator', FILTER_SANITIZE_NUMBER_INT);
+        $id_collaborator = filter_input(INPUT_GET, 'id_collaborator', FILTER_SANITIZE_NUMBER_INT);
     } elseif (isset($_POST['id_collaborator'])) {
         $id_collaborator = filter_input(INPUT_POST, 'id_collaborator', FILTER_SANITIZE_NUMBER_INT);
     } else {
@@ -44,7 +44,7 @@ if ($password != $passwordConfirm) {
         $last_name = "";
     }
 
-    if (isset($_GET['phone']) && isset($_GET['country_code'])) {
+    if (isset($_GET['phone'])) {
         $phone = filter_input(INPUT_GET, 'country_code', FILTER_SANITIZE_SPECIAL_CHARS)." ".filter_input(INPUT_GET, 'phone', FILTER_SANITIZE_SPECIAL_CHARS);
     } elseif (isset($_POST['phone'])) {
         $phone = filter_input(INPUT_POST, 'country_code', FILTER_SANITIZE_SPECIAL_CHARS)." ".filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -76,20 +76,20 @@ if ($password != $passwordConfirm) {
         $email = "";
     }
 
-    if (isset($_GET['linkdinUrl'])) {
-        $linkdinUrl = filter_input(INPUT_GET, 'linkdinUrl', FILTER_SANITIZE_URL);
-    } elseif (isset($_POST['linkdinUrl'])) {
-        $linkdinUrl = filter_input(INPUT_POST, 'linkdinUrl', FILTER_SANITIZE_URL);
+    if (isset($_GET['linkedinUrl'])) {
+        $linkedinUrl = filter_input(INPUT_GET, 'linkedinUrl', FILTER_SANITIZE_URL);
+    } elseif (isset($_POST['linkedinUrl'])) {
+        $linkedinUrl = filter_input(INPUT_POST, 'linkedinUrl', FILTER_SANITIZE_URL);
     } else {
-        $linkdinUrl = "#";
+        $linkedinUrl = "#";
     }
 
-    if (isset($_GET['twiterUrl'])) {
-        $twiterUrl = filter_input(INPUT_GET, 'twiterUrl', FILTER_SANITIZE_URL);
-    } elseif (isset($_POST['twiterUrl'])) {
-        $twiterUrl = filter_input(INPUT_POST, 'twiterUrl', FILTER_SANITIZE_URL);
+    if (isset($_GET['twitterUrl'])) {
+        $twitterUrl = filter_input(INPUT_GET, 'twitterUrl', FILTER_SANITIZE_URL);
+    } elseif (isset($_POST['twitterUrl'])) {
+        $twitterUrl = filter_input(INPUT_POST, 'twitterUrl', FILTER_SANITIZE_URL);
     } else {
-        $twiterUrl = "#";
+        $twitterUrl = "#";
     }
 
     if (isset($_GET['githubUrl'])) {

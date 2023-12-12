@@ -2,14 +2,19 @@
 include('../DAO/Crud.php');
 include('../Model/Enum/StatusActivit.php');
 
+$crud = new Crud();
+
 #Authetication session
 session_start();
 if ($_SESSION['id_user'] == "" || $_SESSION['id_user'] == null) {
   header('location:login.php');
 }
 
+#Loading the collaborator in
+$collaborator = $crud->selectBD("collaborator", "*", "where id_collaborator = '{$_SESSION['id_user']}'");
+
 #Verification of deadline task to show it as delayed task
-$crud = new Crud();
+
 $dateTime = new DateTime();
 
 $all_tasks = $crud->selectBD("task", "*", "");
@@ -204,7 +209,7 @@ $count_message = $crud->selectBD("message", "count(*)", "where id_destin = '{$_S
             ?>
             <li>
               <hr class="dropdown-divider">
-            </li>                    
+            </li>
 
           </ul><!-- End Messages Dropdown Items -->
 
@@ -213,19 +218,19 @@ $count_message = $crud->selectBD("message", "count(*)", "where id_destin = '{$_S
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="<?php echo $_SESSION['photo']; ?>" alt="Profile" class="rounded-circle">
+            <img src="<?php echo $collaborator['photo']; ?>" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">
-              <?php echo $_SESSION['user_name']; ?>
+              <?php echo $collaborator['first_name']." ".$collaborator['last_name']; ?>
             </span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
               <h6>
-                <?php echo $_SESSION['user_name']; ?>
+              <?php echo $collaborator['first_name']." ".$collaborator['last_name']; ?>
               </h6>
               <span>
-                <?php echo $_SESSION['profession']; ?>
+                <?php echo $collaborator['profession']; ?>
               </span>
             </li>
             <li>
