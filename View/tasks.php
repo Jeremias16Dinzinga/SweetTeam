@@ -88,10 +88,7 @@
                     <h4 class="alert-heading"><i class="<?php echo $taskIcon; ?>"></i>
                       <?php echo $item['description']; ?>
                     </h4>
-                    <p style="text-align:justify">Desenvolvimento Profissional: Acredito que o conhecimento em
-                      desenvolvimento back-end é fundamental para construir sistemas e aplicativos robustos e eficientes.
-                      Este curso me proporcionará as habilidades técnicas necessárias para atingir esse objetivo e me tornar
-                      um desenvolvedor altamente qualificado.</p>
+                    <p style="text-align:justify"><?php echo $item['resume']; ?></p>
                     <hr>
                     <p class="mb-0"><span class="text-secondary"> Prazo:
                         <?php echo $item['deadline']; ?>

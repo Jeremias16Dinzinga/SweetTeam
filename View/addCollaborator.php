@@ -18,7 +18,7 @@
     <main id="main" class="main">
         <div class="pagetitle">
             <h1>Colaboradores de
-                <?php echo ($crud->selectBD("project", "description", "where id_project = '{$_GET['id']}'")["description"]); ?>
+                <?php echo ($crud->selectBD("project", "description", "where id_project = '{$_GET['id_project']}'")["description"]); ?>
             </h1>
             <nav>
                 <ol class="breadcrumb">
@@ -60,7 +60,7 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $my_collaboratorIds = $crud->selectByFieldBD("project_collaborator", "id_collaborator", "where id_project = '{$_GET['id']}'");   //Get all the ID collaborator of this project                                              
+                                    $my_collaboratorIds = $crud->selectByFieldBD("project_collaborator", "id_collaborator", "where id_project = '{$_GET['id_project']}'");   //Get all the ID collaborator of this project                                              
                                     foreach ($my_collaboratorIds as $x) {
                                         $item = $crud->selectBD("collaborator", "*", "where id_collaborator = '{$x['id_collaborator']}'");
                                         ?>
@@ -79,7 +79,7 @@
                                                     alt="Profile" class="rounded-circle">
                                             </td>
                                             <td>
-                                                <a href="../controller/CollaboratorController.php?remove_collaborator_to_project=<?php echo $item["id_collaborator"] ?>&&this_project=<?php echo $_GET['id'] ?>"
+                                                <a href="../controller/CollaboratorController.php?remove_collaborator_to_project=<?php echo $item["id_collaborator"] ?>&&this_project=<?php echo $_GET['id_project'] ?>"
                                                     class="btn btn-danger"><i class="bi bi-dash-circle"></i></a>
                                             </td>
                                         </tr>
@@ -147,7 +147,7 @@
                                     }
 
                                     // Get all the ID collaborators of the specified project
-                                    $my_collaboratorIds = $crud->selectByFieldBD("project_collaborator", "id_collaborator", "where id_project = '{$_GET['id']}'");
+                                    $my_collaboratorIds = $crud->selectByFieldBD("project_collaborator", "id_collaborator", "where id_project = '{$_GET['id_project']}'");
 
                                     // Initialize an array to store IDs of collaborators not associated with the project
                                     $another_collaboratorIds = array();
@@ -188,7 +188,7 @@
                                                     alt="Profile" class="rounded-circle">
                                             </td>
                                             <td>
-                                                <a href="../controller/CollaboratorController.php?add_collaborator_to_project=<?php echo $item['id_collaborator'] ?>&&this_project=<?php echo $_GET['id'] ?>"
+                                                <a href="../controller/CollaboratorController.php?add_collaborator_to_project=<?php echo $item['id_collaborator'] ?>&&this_project=<?php echo $_GET['id_project'] ?>"
                                                     class="btn btn-success"><i class="bi bi-plus-circle"></i></a>
                                             </td>
                                         </tr>

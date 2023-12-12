@@ -202,7 +202,7 @@
                                             <label for="Resume" class="col-md-4 col-lg-3 col-form-label">Sobre</label>
                                             <div class="col-md-8 col-lg-9">
                                                 <textarea name="resume" class="form-control" id="Resume"
-                                                    style="height: 100px"><?php echo $collaborator['resume'] ?></textarea>
+                                                    style="height: 90px"><?php echo $collaborator['resume'] ?></textarea>
                                             </div>
                                         </div>
 

@@ -26,6 +26,7 @@
       return $projects = $crud->selectBD("project", "*", "where id_project = '{$x["id_project"]}' and status = 'Cancelado'");
     }
   }
+
   ?>
 
   <main id="main" class="main">
@@ -97,17 +98,17 @@
                   <span class="text-secondary"> Resposnsável:
                     <?php echo ($leader['first_name'] . " " . $leader['last_name']); ?>
                   </span> <br /><br />
-                  <a href="addTask.php?id=<?php echo $item['id_project'] ?>" class="btn btn-primary"><i
+                  <a href="addTask.php?id_project=<?php echo $item['id_project'] ?>" class="btn btn-primary"><i
                       class="bi bi-journal-text"></i><span>
                       Tarefas(
                       <?php echo $count_task['count(*)']; ?>)
                     </span></a>
-                  <a href="addCollaborator.php?id=<?php echo $item['id_project'] ?>" class="btn btn-success"><i
+                  <a href="addCollaborator.php?id_project=<?php echo $item['id_project'] ?>" class="btn btn-success"><i
                       class="ri-team-line"></i><span> Colaboradores</span></a>
                   <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#CancelModel"> <i
                       class="ri-close-circle-line"></i><span> Cancelar</span></button>
                   <div class="d-grid gap-2 mt-3">
-                    <a href="addCollaborator.php?id=<?php echo $item['id_project'] ?>" class="btn btn-secondary"><i
+                    <a href="addCollaborator.php?id_project=<?php echo $item['id_project'] ?>" class="btn btn-secondary"><i
                         class="bi bi-eye "></i><span> Mais
                         Detalhes</span></a>
                   </div>

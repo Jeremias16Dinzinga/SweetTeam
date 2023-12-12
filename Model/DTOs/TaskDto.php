@@ -2,7 +2,7 @@
 
 if (isset($_GET['id_task'])) {
     $id_task = filter_input(INPUT_GET, 'id_task', FILTER_SANITIZE_NUMBER_INT);
-} elseif (isset($_POST['id_task'])) {
+} elseif (isset($_POST['id_task'])&&$_POST['id_task']!="") {
     $id_task = filter_input(INPUT_POST, 'id_task', FILTER_SANITIZE_NUMBER_INT);
 } else {
     $id_task = 0;
@@ -40,9 +40,16 @@ if (isset($_GET['id_collaborator'])) {
     $id_collaborator = 0;
 }
 
+if (isset($_GET['resume'])) {
+    $resume = filter_input(INPUT_GET, 'resume', FILTER_SANITIZE_SPECIAL_CHARS);
+} elseif (isset($_POST['resume'])) {
+    $resume = filter_input(INPUT_POST, 'resume', FILTER_SANITIZE_SPECIAL_CHARS);
+} else {
+    $resume = "";
+}
+
 $dateTime = new DateTime();
 
-$create_date = $dateTime->format('Y-m-d H:i:s');
 $update_date = $dateTime->format('Y-m-d H:i:s');
 
 ?>

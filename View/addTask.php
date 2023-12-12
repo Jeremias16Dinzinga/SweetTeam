@@ -13,13 +13,36 @@
     <?php
     require_once 'header.php';
     $crud = new Crud();
-    $my_collaboratorIds = $crud->selectByFieldBD("project_collaborator", "id_collaborator", "where id_project = '{$_GET['id']}'");   //Get all the ID collaborator of this project     
+    $my_collaboratorIds = $crud->selectByFieldBD("project_collaborator", "id_collaborator", "where id_project = '{$_GET['id_project']}'");   //Get all the ID collaborator of this project     
+    #verification if is update action or insert action
+    if (isset($_GET['update_id_task'])) {
+        $task_item = $crud->selectBD("task", "*", "where id_task = '{$_GET['update_id_task']}'");
+        $task_collaborator = $crud->selectBD("collaborator", "*", "where id_collaborator = '{$task['id_collaborator']}'");
+        $select_text = $task_collaborator['first_name'] . " " . $task_collaborator['last_name'];
+        $box_title = "Actualizar Tarefa";
+        $btn_text = "Actualizar";
+        $btn_style = "bi bi-arrow-right-circle";
+    } else {
+        $task_item['id_task'] = "";
+        $task_item['description'] = "";
+        $task_item['resume'] = "";
+        $task_item['deadline'] = "";
+        $task_item['id_collaborator'] = "";
+        $task_item['id_project'] = "";
+        $task_item['create_date'] = "";
+        $task_item['status'] = "";
+        $task_item['update_date'] = "";
+        $select_text = "Selecione colaborador";
+        $box_title = "Adicionar Tarefa";
+        $btn_text = "Adicionar";
+        $btn_style = "bi bi-plus-circle";
+    }
     ?>
 
     <main id="main" class="main">
         <div class="pagetitle">
             <h1>Tarefas do projecto
-                <?php echo ($crud->selectBD("project", "description", "where id_project = '{$_GET['id']}'")["description"]); ?>
+                <?php echo ($crud->selectBD("project", "description", "where id_project = '{$_GET['id_project']}'")["description"]); ?>
             </h1>
             <nav>
                 <ol class="breadcrumb">
@@ -47,49 +70,70 @@
                 <div class="col-sm-10">
                     <div class="card">
                         <div class="card-body">
-                            <h6 class="card-title">Adicionar Tarefa</h6>
+                            <h6 class="card-title">
+                                <?php echo $box_title ?>
+                            </h6>
 
                             <!-- add task -->
                             <!-- Horizontal Form -->
                             <form method="Post" action="../Controller/TaskController.php">
-                                <input type="text" hidden class="form-control"
-                                    value="<?php echo $_GET['id']; ?>" name="id_project">
+                                <input type="text" hidden value="<?php echo $task_item['id_task']; ?>" name="id_task">
                                 <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Descrição</label>
-                                    <div class="col-sm-5">
-                                        <input type="text" name="description" class="form-control">
-                                    </div>
-                                    <div class="col-sm-5">
-                                        <div class="col-sm-10">
-                                            <select name="id_collaborator" id="id_collaborator" class="form-select"
-                                                aria-label="Default select example">
-                                                <option selected>Selecione collaborador</option>
-                                                <?php
-                                                foreach ($my_collaboratorIds as $collaborator) {
-                                                    $x = $crud->selectBD("collaborator", "*", "where id_collaborator = '{$collaborator['id_collaborator']}'");
-                                                    ?>
-                                                    <option value="<?php echo $x['id_collaborator']; ?>">
-                                                        <?php echo $x['first_name'] . " " . $x['last_name']; ?>
+                                    <input type="text" hidden class="form-control"
+                                        value="<?php echo $_GET['id_project']; ?>" name="id_project">
+                                    <div class="row mb-3">
+                                        <label for="inputText" class="col-sm-2 col-form-label">Tarefa</label>
+                                        <div class="col-sm-5">
+                                            <input type="text" name="description"
+                                                value="<?php echo $task_item['description'] ?>" class="form-control">
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <div class="col-sm-10">
+                                                <select name="id_collaborator" id="id_collaborator" class="form-select"
+                                                    aria-label="Default select example">
+                                                    <option selected
+                                                        value="<?php echo $task_collaborator['id_collaborator'] ?>">
+                                                        <?php echo $select_text ?>
                                                     </option>
                                                     <?php
-                                                }
-                                                ?>
-                                            </select>
+                                                    foreach ($my_collaboratorIds as $collaborator) {
+                                                        $x = $crud->selectBD("collaborator", "*", "where id_collaborator = '{$collaborator['id_collaborator']}' and id_collaborator != '{$task_collaborator['id_collaborator']}'");                                                        
+                                                        if ($x != false) {
+                                                            ?>
+                                                            <option value="<?php echo $x['id_collaborator']; ?>">
+                                                                <?php echo $x['first_name'] . " " . $x['last_name']; ?>
+                                                            </option>
+                                                            <?php
+                                                        }
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                    <div class="row mb-3">
+                                        <label for="inputText" class="col-sm-2 col-form-label">Descrição</label>
+                                        <div class="col-sm-9">
+                                            <textarea name="resume" class="form-control" id="Resume"
+                                                style="height: 80px"><?php echo $task_item['resume'] ?></textarea>
+                                        </div>
+                                    </div>
 
-                                <div class="row mb-3">
-                                    <label for="inputDeadline" class="col-sm-2 col-form-label">Prazo</label>
-                                    <div class="col-sm-5">
-                                        <input type="date" id="inputDeadline" name="deadline" class="form-control">
+                                    <div class="row mb-3">
+                                        <label for="inputDeadline" class="col-sm-2 col-form-label">Prazo</label>
+                                        <div class="col-sm-5">
+                                            <input type="date" id="inputDeadline"
+                                                value="<?php echo $task_item['deadline'] ?>" name="deadline"
+                                                class="form-control">
+                                        </div>
+                                        <div class="col-sm-2"></div>
+                                        <div class="col-sm-3">
+                                            <button type="submit" class="btn btn-primary "><i
+                                                    class="<?php echo $btn_style ?>">
+                                                    <?php echo $btn_text ?>
+                                                </i></button><br /><br />
+                                        </div>
                                     </div>
-                                    <div class="col-sm-2"></div>
-                                    <div class="col-sm-3">
-                                        <button type="submit" class="btn btn-primary "><i class="bi bi-plus-circle">
-                                                Adicionar</i></button><br /><br />
-                                    </div>
-                                </div>
 
                             </form><!-- End Horizontal Form -->
 
@@ -118,7 +162,7 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $all_tasks = $crud->selectByFieldBD("task", "*", "where id_project = '{$_GET['id']}'");   //Get all the task of this project                                              
+                                    $all_tasks = $crud->selectByFieldBD("task", "*", "where id_project = '{$_GET['id_project']}'");   //Get all the task of this project                                              
                                     foreach ($all_tasks as $item) {
                                         $collaborator = $crud->selectBD("collaborator", "*", "where id_collaborator = '{$item['id_collaborator']}'");   //Get the collaborator of this project                                                                                                                           
                                         ?>
@@ -130,11 +174,15 @@
                                                 <?php echo ($item['status']); ?>
                                             </td>
                                             <td>
-                                                
+
                                                 <?php echo ($collaborator['first_name'] . " " . $collaborator['last_name']); ?>
                                             </td>
                                             <td>
                                                 <?php echo ($item['deadline']); ?>
+                                            </td>
+                                            <td>
+                                                <a href="addTask.php?id_project=<?php echo $item['id_project'] ?>&&update_id_task=<?php echo $item['id_task'] ?>"
+                                                    class="btn btn-success"><i class="bi bi-pencil"></i></a>
                                             </td>
                                         </tr>
                                         <?php

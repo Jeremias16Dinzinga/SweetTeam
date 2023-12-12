@@ -14,14 +14,13 @@ if ($_SESSION['id_user'] == "" || $_SESSION['id_user'] == null) {
 $collaborator = $crud->selectBD("collaborator", "*", "where id_collaborator = '{$_SESSION['id_user']}'");
 
 #Verification of deadline task to show it as delayed task
-
 $dateTime = new DateTime();
 
 $all_tasks = $crud->selectBD("task", "*", "");
+$now = $dateTime->format('Y-m-d');  
 foreach ($all_tasks as $task) {
-  $now = $dateTime->format('Y-m-d H:i:s');
-  $deadline = strtotime($task['deadline']);
-  if ($deadline < $now && $task['status'] == "Pendente") {
+    
+  if ($task['deadline'] < $now && $task['status'] == "Pendente") {
     $crud->updateBD("task", "status=?", "id_task = '{$task['id_task']}'", array(StatusActivit::Atrazado->name));
   }
 }
@@ -144,7 +143,7 @@ $count_message = $crud->selectBD("message", "count(*)", "where id_destin = '{$_S
                       <?php echo $item["content"] ?>
                     </p>
                     <p>
-                      <?php echo (time_manage($item["create_date"], $dateTime)) ?> min
+                      <?php echo(time_manage($item["create_date"], $dateTime)) ?> min
                     </p>
                   </div>
                 </li>
