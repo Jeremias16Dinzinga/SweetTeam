@@ -143,6 +143,7 @@
           </div>
         </div>
         <!-- End Basic Modal-->
+      </div>
     </section>
 
   </main><!-- End #main -->
@@ -151,6 +152,7 @@
   <?php
   require_once 'footer.php';
   ?>
+
 
   </body>
 

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Adicionar Tarefas</title>
+    <title>Tarefas do projecto</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -65,6 +65,12 @@
         <?php } ?><!-- End not allowed message -->
 
         <section class="section">
+            <div class="row mb-4" style="margin-right: 2px;">
+                <div class="col-lg-7"></div>
+                <a href="addCollaborator.php?id_project=<?php echo $_GET['id_project'] ?>" class="btn btn-success col-lg-4"><i
+                        class="ri-team-line"></i><span> Colaboradores do Projecto</span></a>
+                <div class="col-lg-1"></div>
+            </div>
             <div class="row">
                 <div class="col-lg-1"></div>
                 <div class="col-sm-10">
@@ -97,7 +103,7 @@
                                                     </option>
                                                     <?php
                                                     foreach ($my_collaboratorIds as $collaborator) {
-                                                        $x = $crud->selectBD("collaborator", "*", "where id_collaborator = '{$collaborator['id_collaborator']}' and id_collaborator != '{$task_collaborator['id_collaborator']}'");                                                        
+                                                        $x = $crud->selectBD("collaborator", "*", "where id_collaborator = '{$collaborator['id_collaborator']}' and id_collaborator != '{$task_collaborator['id_collaborator']}'");
                                                         if ($x != false) {
                                                             ?>
                                                             <option value="<?php echo $x['id_collaborator']; ?>">

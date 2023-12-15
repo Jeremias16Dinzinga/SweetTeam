@@ -6,7 +6,10 @@ include('../Model/Enum/StatusNotice.php');
 $crud = new Crud();
 
 #Regist a new user
-if ($first_name != null && $last_name != null && $phone != null && $profession != null && $photo != null && $email != null && $password != null && $country != null && $update_date != null) {
+if ($first_name != null && $last_name != null && $phone != null && $profession != null && $email != null && $password != null && $country != null && $update_date != null) {
+    if ($photo == "")
+        $photo = "../assets/Files/collaborator/perfilPhoto.jpg";
+
     $create_date = $dateTime->format('Y-m-d H:i:s');
     $result = $crud->insertBD("collaborator", "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?", array($id_collaborator, $first_name, $last_name, $phone, $profession, $resume, $photo, $email, $password, $linkedinUrl, $twitterUrl, $githubUrl, $country, $create_date, $update_date));
     if ($result != null) {
@@ -44,7 +47,7 @@ if (isset($_POST['current_password'])) {
     } elseif ($new_password == $confirm_password) {
         $crud->updateBD("collaborator", "password=?", "id_collaborator = ?", array($new_password, $id_collaborator));
         header('location:../View/profile.php?success=1');
-    }else{
+    } else {
         header('location:../view/profile.php?passwordValidation=1');
     }
 }
@@ -73,13 +76,13 @@ if (isset($_GET['remove_collaborator_to_project'])) {
 
     #Delete a collqborator from a project
     if ($leader_id != $_GET['remove_collaborator_to_project']) {
-        $crud->deleteBD("project_collaborator", "id_collaborator=? and id_project=? ", array($_GET['remove_collaborator_to_project'], $_GET['this_project']));        
+        $crud->deleteBD("project_collaborator", "id_collaborator=? and id_project=? ", array($_GET['remove_collaborator_to_project'], $_GET['this_project']));
 
         $project = $crud->selectBD("project", "*", "where id_project = '{$_GET['this_project']}'");
         $collaborator = $crud->selectBD("collaborator", "*", "where id_collaborator = '{$project['id_leader']}'");
 
         #Take all of this project from the deleted collaborator
-        $crud->updateBD("task","id_collaborator=?","id_collaborator = '{$_GET['remove_collaborator_to_project']}'",array($project['id_leader']));
+        $crud->updateBD("task", "id_collaborator=?", "id_collaborator = '{$_GET['remove_collaborator_to_project']}'", array($project['id_leader']));
 
         #Sending notification to the collaborator after be removed in project
         $content = $collaborator["first_name"] . " " . $collaborator["last_name"] . " removeu-te do projecto " . $project["description"] . ".";

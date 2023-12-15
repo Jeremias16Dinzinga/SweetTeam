@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Pages / Register - NiceAdmin Bootstrap Template</title>
+    <title>Criar uma conta</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -161,8 +161,7 @@
 
                                         <div class="col-12">
                                             <label for="yourPhoto" class="form-label">Foto</label>
-                                            <input type="file" name="photo" class="form-control" id="yourPhoto"
-                                                required>
+                                            <input type="file" name="photo" class="form-control" id="yourPhoto">
                                             <div class="invalid-feedback">Porfavor, carregue uma foto!</div>
                                         </div>
 

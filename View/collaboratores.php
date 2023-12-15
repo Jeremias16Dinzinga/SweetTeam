@@ -15,6 +15,7 @@
     $crud = new Crud();
     $shared_collaboratorIds = array();
     $shared_collaboratores = array();
+    $t;
     $test;
 
     //Get all the ID projects I'm in
@@ -23,13 +24,13 @@
     #Get all the ID collaborator who we are sharing project
     foreach ($my_projectsIds as $my_project_id) {
         $t = $crud->selectBD("project_collaborator", "id_collaborator", "where id_project = '{$my_project_id['id_project']}' and id_collaborator != '{$_SESSION['id_user']}'");
-        $found = false;
+        $found = false;        
         foreach ($shared_collaboratorIds as $oneSharedId) {
             if ($t == $oneSharedId)
                 $found = true;
-                break;
+            break;
         }
-        if ($found==false)
+        if ($found == false)
             $shared_collaboratorIds[] = $t;
     }
 
@@ -70,13 +71,18 @@
                 $collaboratores = target($crud, $shared_collaboratores);
                 if ($collaboratores != null) {
                     foreach ($collaboratores as $item) {
-                        $count_shared = 0;
+                        $count_shared = 0;                        
+                        if ($item == false) {
+                            break;
+                        }
 
                         #Counting the shared project                        
                         foreach ($my_projectsIds as $my_project_id) {
                             $y = $crud->selectBD("project_collaborator", "count(*)", "where id_project = '{$my_project_id['id_project']}' and id_collaborator = '{$item['id_collaborator']}'");
+
                             if ($y["count(*)"] == 1)
                                 $count_shared++;
+
                         }
 
 

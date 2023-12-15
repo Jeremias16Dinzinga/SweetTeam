@@ -17,9 +17,9 @@ $collaborator = $crud->selectBD("collaborator", "*", "where id_collaborator = '{
 $dateTime = new DateTime();
 
 $all_tasks = $crud->selectBD("task", "*", "");
-$now = $dateTime->format('Y-m-d');  
+$now = $dateTime->format('Y-m-d');
 foreach ($all_tasks as $task) {
-    
+
   if ($task['deadline'] < $now && $task['status'] == "Pendente") {
     $crud->updateBD("task", "status=?", "id_task = '{$task['id_task']}'", array(StatusActivit::Atrazado->name));
   }
@@ -143,7 +143,7 @@ $count_message = $crud->selectBD("message", "count(*)", "where id_destin = '{$_S
                       <?php echo $item["content"] ?>
                     </p>
                     <p>
-                      <?php echo(time_manage($item["create_date"], $dateTime)) ?> min
+                      <?php echo (time_manage($item["create_date"], $dateTime)) ?> min
                     </p>
                   </div>
                 </li>
@@ -190,15 +190,17 @@ $count_message = $crud->selectBD("message", "count(*)", "where id_destin = '{$_S
 
             if ($my_messages != null) {
               foreach ($my_messages as $item) {
+                $sender_of_message = $crud->selectBD("collaborator", "*", "where id_collaborator = '{$item['id_sender']}'");
                 ?>
 
                 <li class="message-item">
                   <a href="#">
-                    <img src="../assets/img/messages-1.jpg" alt="" class="rounded-circle">
+                    <img src="<?php echo$sender_of_message['photo']?>" alt="" class="rounded-circle">
                     <div>
-                      <h4>Maria Hudson</h4>
-                      <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                      <p>4 hrs. ago</p>
+                      
+                      <h4><?php echo$item['title']?></h4>
+                      <p><?php echo$item['content']?></p>
+                      <p><?php echo (time_manage($item["create_date"], $dateTime)) ?> min</p>
                     </div>
                   </a>
                 </li>
@@ -219,14 +221,14 @@ $count_message = $crud->selectBD("message", "count(*)", "where id_destin = '{$_S
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="<?php echo $collaborator['photo']; ?>" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">
-              <?php echo $collaborator['first_name']." ".$collaborator['last_name']; ?>
+              <?php echo $collaborator['first_name'] . " " . $collaborator['last_name']; ?>
             </span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
               <h6>
-              <?php echo $collaborator['first_name']." ".$collaborator['last_name']; ?>
+                <?php echo $collaborator['first_name'] . " " . $collaborator['last_name']; ?>
               </h6>
               <span>
                 <?php echo $collaborator['profession']; ?>
